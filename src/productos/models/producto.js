@@ -1,5 +1,5 @@
-import { obtenerNuevoId } from '../compartido/ids.js'
-import { lanzarErrorDeValidacionDeDatos} from '../compartido/validacion.js'
+import { obtenerNuevoId } from '../compartido/id/ids.js'
+import { lanzarErrorDeValidacionDeDatos} from '../../compartido/errors/validacion.js'
 
 
 export function crearProducto(datosProducto) {

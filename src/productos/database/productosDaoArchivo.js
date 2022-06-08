@@ -1,4 +1,6 @@
 import { crearProducto } from './producto.js'
+import { crearErrorRecursoNoEncontrado } from '../../compartido/errors/ErrorRecursoNoEncontrado.js'
+
 
 const productos = []
 
@@ -19,10 +21,21 @@ export function borrarProductos() {
     }
 }
 
+export function recuperarProducto(id) {
+    const buscado = productos.find(p => p.id === id)
+    if (buscado) {
+        return copiarProducto(buscado)
+    } else {
+        throw crearErrorRecursoNoEncontrado('producto')
+    }
+}
+
 function copiarProducto(producto) {
     return {...producto}
     
 }
+
+
 
 export function obtenerProductoSegunId(id) {
     const productoBuscado = productos.find(p => p.id === id)
@@ -52,4 +65,8 @@ export function reemplazarProducto(id, datosProducto) {
             producto.id = id
             productos[idProducto] = producto      
     }
+}
+
+export function nombreEstaDisponible(nombre) {
+    return usuarios.every(u => u.nombre !== nombre)
 }
