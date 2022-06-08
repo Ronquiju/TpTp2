@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import * as api from '../services/usuarios.js'
 
-import { respuestaConError } from '../../compartido/errors/validacion.js'
+import { prepararRespuestaConError } from '../../compartido/errors/respuestaConError.js'
 
 const routerUsuarios = new Router()
 
@@ -21,8 +21,11 @@ routerUsuarios.post('/', (req, res, next) => {
         const usuarioAgregado = api.agregarUsuario(usuario)
         res.status(201).json(usuarioAgregado)
     } catch (error) {
-        const { codigo, mensaje } = respuestaConError(error)
-        res.status(codigo).json({ mensaje })
+        if (error.tipo === 'NOMBRE_UNICO') {
+            res.status(409).json({ error: error.message })
+        } else {
+            res.status(400).json({ error: error.message })
+        }
     }
 })
 
@@ -37,11 +40,11 @@ routerUsuarios.delete('/:id', (req, res, next) => {
 
 routerUsuarios.put('/:id', (req, res, next) => {
     try {
-        const datosAct = req.body
-        const usuarioAct = api.reemplazarUsuario(req.params.id, datosAct)
-        res.json(usuarioAct)
+        const datosActualizados = req.body
+        const usuarioActualizado = api.reemplazarUsuario(req.params.id, datosActualizados)
+        res.json(usuarioActualizado)
     } catch (error) {
-        if (error.tipo == 'not_found') {
+        if (error.tipo === 'NO_ENCONTRADO') {
             res.status(404).json({ error: error.message })
         } else {
             res.status(400).json({ error: error.message })

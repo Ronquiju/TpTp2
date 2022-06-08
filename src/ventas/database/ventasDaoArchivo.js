@@ -4,6 +4,10 @@ import { crearErrorRecursoNoEncontrado } from '../../compartido/errors/ErrorRecu
 
 const ventas = []
 
+export function obtenerVentas(){
+    return[...ventas]
+}
+
 export function guardarVenta(venta) {
     const indiceBuscado = ventas.findIndex(v => v.id === venta.id)
     if (indiceBuscado === -1) {

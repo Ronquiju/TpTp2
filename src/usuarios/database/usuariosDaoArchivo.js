@@ -4,6 +4,10 @@ import { crearErrorRecursoNoEncontrado } from '../../compartido/errors/ErrorRecu
 
 const usuarios = []
 
+export function obtenerUsuarios(){
+    return[...usuarios]
+}
+
 export function guardarUsuario(usuario) {
     const indiceBuscado = usuarios.findIndex(u => u.id === usuario.id)
     if (indiceBuscado === -1) {
@@ -11,6 +15,7 @@ export function guardarUsuario(usuario) {
     } else {
         usuarios[indiceBuscado] = usuario
     }
+    
 }
 
 export function elminarUsuario(id) {
@@ -32,12 +37,14 @@ export function borrarUsuarios() {
 }
 
 export function recuperarusuario(id) {
-    const buscado = usuarios.find(u => u.id === id)
+     const buscado = usuarios.find(u => u.id === id)
+     
     if (buscado) {
-        return copiarUsuario(buscado)
+        return {...buscado}
     } else {
-        throw crearErrorRecursoNoEncontrado('producto')
+        throw crearErrorRecursoNoEncontrado('usuario')
     }
+    
 }
 
 function copiarUsuario(usuario) {
@@ -47,7 +54,7 @@ function copiarUsuario(usuario) {
 
 
 
-export function obtenerUsuariooSegunId(id) {
+export function obtenerUsuarioSegunId(id) {
     const usuarioBuscado = usuarios.find(u => u.id === id)
     if (usuarioBuscado) {
         return copiarUsuario(usuarioBuscado)

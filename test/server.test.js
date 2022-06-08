@@ -236,11 +236,13 @@ describe('servidor pruebas', () => {
                             precio: "85000",
                             stock: "25"
                         }
-                        const { status } = await axios.post(urlProductos, producto)
+                        const { data: productoAgregado, status } = await axios.post(urlProductos, producto)
                         assert.strictEqual(status, 201)
-                       
+
                         const productosDespues = obtenerProductos()
-                        assert.deepStrictEqual(productosDespues.lenght , productosAnteriores.lenght + 1)
+
+                        const productoAgregadoEsperado = {...producto, id: productoAgregado.id}
+                        assert.deepStrictEqual(productosDespues, productosAnteriores.concat(productoAgregadoEsperado))
 
                        
                     })

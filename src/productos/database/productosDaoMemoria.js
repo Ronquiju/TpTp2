@@ -41,7 +41,9 @@ function copiarProducto(producto) {
     
 }
 
-
+export function obtenerProductos(){
+    return[...productos]
+}
 
 export function obtenerProductoSegunId(id) {
     const productoBuscado = productos.find(p => p.id === id)

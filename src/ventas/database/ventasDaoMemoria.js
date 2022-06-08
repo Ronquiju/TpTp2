@@ -45,7 +45,9 @@ function copiarVenta(venta) {
     
 }
 
-
+export function obtenerVentas(){
+    return[...ventas]
+}
 
 export function obtenerVentaSegunId(id) {
     const ventaBuscada = ventas.find(v => v.id === id)

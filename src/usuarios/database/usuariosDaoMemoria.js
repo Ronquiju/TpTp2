@@ -4,6 +4,10 @@ import { crearErrorRecursoNoEncontrado } from '../../compartido/errors/ErrorRecu
 
 const usuarios = []
 
+export function obtenerUsuarios(){
+    return[...usuarios]
+}
+
 export function guardarUsuario(usuario) {
     const indiceBuscado = usuarios.findIndex(u => u.id === usuario.id)
     if (indiceBuscado === -1) {
@@ -11,6 +15,7 @@ export function guardarUsuario(usuario) {
     } else {
         usuarios[indiceBuscado] = usuario
     }
+    
 }
 
 export function elminarUsuario(id) {
