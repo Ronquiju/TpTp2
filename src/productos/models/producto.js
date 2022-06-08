@@ -1,16 +1,16 @@
-import { obtenerNuevoId } from '../compartido/id/ids.js'
-import { lanzarErrorDeValidacionDeDatos} from '../../compartido/errors/validacion.js'
+import { obtenerNuevoId } from '../../compartido/id/ids.js'
+import {crearErrorDeDatosFaltantes} from '../../compartido/errors/errorDatosFaltantes.js'
 
 
 export function crearProducto(datosProducto) {
     if (!datosProducto.nombre) {
-        lanzarErrorDeValidacionDeDatos('nombre')
+        crearErrorDeDatosFaltantes('nombre')
     }
     if (!datosProducto.precio) {
-        lanzarErrorDeValidacionDeDatos('precio')
+        crearErrorDeDatosFaltantes('precio')
     }
     if (datosProducto.stock < 0) {
-        lanzarErrorDeValidacionDeDatos('stock')
+        crearErrorDeDatosFaltantes('stock')
     }
     
     const producto = {

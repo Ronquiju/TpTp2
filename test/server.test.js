@@ -6,30 +6,30 @@ import {
     obtenerUsuarios,
     agregarUsuario,
     borrarUsuarios, obtenerUsuarioSegunId
-} from '../src/usuarios/usuarios.js'
+} from '../src/usuarios/services/usuarios.js'
 
 import {
     obtenerVentas,
     agregarVenta,
     borrarVentas
-} from '../src/ventas/ventas.js'
+} from '../src/ventas/services/ventas.js'
 
 import { obtenerProductos,
     agregarProducto,
-    borrarProductos, obtenerProductoSegunId} from '../src/productos/productos.js'
+    borrarProductos, obtenerProductoSegunId } from '../src/productos/services/productos.js'
 
 
     const venta1 = {
         fechaCompra:"14/03/1999",
         precioTotal: 1478,
         productos:['cafetera', 'licuadora'],
-        usuario: { nombre:"Juan", domicilio:"Rivadavia12",}  
+        usuario: { nombre:"Juan", domicilio:"Rivadavia12" }  
     }
     const venta2 = {
         fechaCompra:"04/07/2022",
         precioTotal: 7848,
         productos:['aspiradora', 'tostadora'],
-        usuario: { nombre:"Maria", domicilio:"Alberti23",}  
+        usuario: { nombre:"Maria", domicilio:"Alberti23"}  
     }
     
 const usuario1 = {

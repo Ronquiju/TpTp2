@@ -1,6 +1,6 @@
 import { MODO_PERSISTENCIA } from '../../config/config.js'
 import * as daoArchivos from './productosDaoArchivo.js'
-import * as daoMemoria from './usuariosDaoMemoria.js'
+import * as daoMemoria from './productosDaoMemoria.js'
 
 let dao
 

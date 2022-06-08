@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import * as api from '../services/productos.js'
 
-import { respuestaConError } from '../compartido/errors/validacion.js'
+import { respuestaConError } from '../../compartido/errors/validacion.js'
 
 const routerProductos = new Router()
 
@@ -37,7 +37,7 @@ routerProductos.delete('/:id', (req, res, next) => {
     }
 })
 
-routerProductos.put('/:id', (req, res) => {
+routerProductos.put('/:id', (req, res, next) => {
     try {
         const datosAct = req.body
         const productoAct = api.reemplazarProducto(req.params.id, datosAct)

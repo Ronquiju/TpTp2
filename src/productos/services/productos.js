@@ -1,4 +1,4 @@
-import { crearProducto } from '../models/producto'
+import { crearProducto } from '../models/producto.js'
 import dao from '../database/productosDao.js'
 import { crearErrorNombreUnico } from '../../compartido/errors/ErrorNombreUnico.js'
 
@@ -18,7 +18,7 @@ export function agregarProducto(datosProducto) {
 }
 
 export function borrarProductos() {
-    dao.eliminarProductos()
+    dao.borrarProductos()
 }
 
 export function obtenerProductoSegunId(id) {
