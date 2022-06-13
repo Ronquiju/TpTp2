@@ -3,27 +3,18 @@ import {crearErrorDeDatosFaltantes} from '../../compartido/errors/errorDatosFalt
 
 
 export function crearVenta(datos) {
-    if (!datos.id) {
-        crearErrorDeDatosFaltantes('id')
-    }
-
     if (!datos.fechaCompra) {
-        crearErrorDeDatosFaltantes('fechaCompra')
+       throw crearErrorDeDatosFaltantes('fechaCompra')
     }
     
     if (!datos.precioTotal) {
-        crearErrorDeDatosFaltantes('precioTotal')
+      throw  crearErrorDeDatosFaltantes('precioTotal')
     }
-    
-    if (!datos.usuario.domicilioEnvio) {
-        crearErrorDeDatosFaltantes('domicilioEnvio')
-    }
-
-    if (!datos.productos) {
-        crearErrorDeDatosFaltantes('productos')
+   if (!datos.productos) {
+       throw crearErrorDeDatosFaltantes('productos')
     }
     if (!datos.usuario) {
-        crearErrorDeDatosFaltantes('comprador')
+      throw  crearErrorDeDatosFaltantes('comprador')
     }
 
 
@@ -31,7 +22,6 @@ export function crearVenta(datos) {
         id: obtenerNuevoId('venta'),
         fechaCompra: datos.fechaCompra,
         precioTotal: datos.precioTotal,
-        domicilioEnvio: datos.usuario.domicilioEnvio,
         productos: datos.productos,
         usuario: datos.usuario,
     }

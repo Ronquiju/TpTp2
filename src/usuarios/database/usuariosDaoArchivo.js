@@ -36,11 +36,11 @@ export function borrarUsuarios() {
     }
 }
 
-export function recuperarusuario(id) {
+export function recuperarUsuario(id) {
      const buscado = usuarios.find(u => u.id === id)
      
     if (buscado) {
-        return {...buscado}
+        return buscado
     } else {
         throw crearErrorRecursoNoEncontrado('usuario')
     }
@@ -74,7 +74,7 @@ export function borrarUsuarioSegunId(id) {
 }
 
 export function reemplazarUsuario(id, datosUsuario) {
-    const idUsuario = usuarios.findIndex(u => u.id === id)
+    const idUsuario = usuarios.findIndex(u => u.id === id.id)
     if (idUsuario === -1) {
         throw new Error('usuario no encontrado')
     } else {

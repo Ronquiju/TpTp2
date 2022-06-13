@@ -9,7 +9,7 @@ export function obtenerProductos(){
 }
 
 export function guardarProducto(producto) {
-    const indiceBuscado = productos.findIndex(p => p.id === carrera.id)
+    const indiceBuscado = productos.findIndex(p => p.id === producto.id)
     if (indiceBuscado === -1) {
         productos.push(producto)
     } else {

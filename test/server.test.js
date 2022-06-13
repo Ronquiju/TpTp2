@@ -53,7 +53,7 @@ const usuario2 = {
 }
 
 const producto1 = {
-    nombre: "Heladera Samsung",
+    nombre: "Heladera Philco",
     precio: "125000",
     stock: "25"
 }
@@ -253,7 +253,7 @@ describe('servidor pruebas', () => {
 
                         const productosAnteriores = obtenerProductos()
                         const producto = {
-                            nombre: "",
+                            nombre:'',
                             precio: 85000,
                             stock: 25
                         }
@@ -335,14 +335,17 @@ describe('servidor pruebas', () => {
                 it('cambia el nombre  del producto existente por el nuevo nombre', async () =>{
                     
                     const productoAgregado = agregarProducto(producto1)
-                    const datosAct = {...productoAgregado, nombreProducto: "Heladera Samsung Modelo T150"}
+                    const nuevoNombreProducto = "HeladeraSamsung"
+                    const datosAct = {...productoAgregado, nombre: nuevoNombreProducto}
 
                     const  {status} = await axios.put(urlProductos + '/' + productoAgregado.id, datosAct)
                     assert.strictEqual(status,200)
                     
                     const productoBuscado = obtenerProductoSegunId(productoAgregado.id)
                     assert.deepStrictEqual(productoBuscado, datosAct)
-                    
+
+
+            
                 })
             })
 
@@ -351,23 +354,24 @@ describe('servidor pruebas', () => {
             describe('intento de crear una venta', () =>{
                 describe('si los datos son validos', () =>{
                     it('crea, guarda y devuelve una venta', async () => {
-                        
-                        const ventaAnt = obtenerVentas()
-                        const venta1 = {
+
+                        const ventasAnterior = obtenerVentas()
+
+                        const venta = {
                             fechaCompra:"14/03/1999",
                             precioTotal: 1478,
-                            productos:['cafetera', 'licuadora'],
-                            usuario: { nombre:"Juan", domicilio:"Rivadavia12",}  
+                            productos: producto1,
+                            usuario: usuario1
                                                 
                         }
 
-                        const { data: ventaCrear, status } = await axios.post(urlVentas, venta1)
+                        const { data: ventaAgregada, status } = await axios.post(urlVentas, venta)
                         assert.strictEqual(status, 201)
 
-                        const ventaPost = obtenerUsuarios()
+                        const ventasDespues = obtenerVentas()
 
-                        const ventaCreadaEsperado = {...venta1, id: ventaCrear.id}
-                        assert.deepStrictEqual(ventaPost, ventaAnt.concat(ventaPost))
+                        const ventaAgregadaEsperada = {...venta, id: ventaAgregada.id}
+                        assert.deepStrictEqual(ventasDespues, ventasAnterior.concat(ventaAgregadaEsperada))
                     })
                 })
 
@@ -380,7 +384,7 @@ describe('servidor pruebas', () => {
             describe('pedir venta por id', () => {
                 it('devuelve una venta', async () => {
                     
-                    const ventaAagregar = agregarUsuario(venta2)
+                    const ventaAagregar = agregarVenta(venta2)
 
                     let ventaObtenido
                     const{ data, status } = await axios.get(urlVentas + '/' + ventaAagregar.id)
@@ -393,7 +397,7 @@ describe('servidor pruebas', () => {
             
             //traer una venta con un id que no existe
             describe('pedir venta con id que no existe', () => {
-                it('no encuentra la vneta', async () => {
+                it('no encuentra la venta', async () => {
                     await assert.rejects(
                         axios.get(urlVentas + '/idInvalido'),//le mando por barritas un id de una venta, se lo concateno a la url
                         error => {

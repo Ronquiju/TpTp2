@@ -3,19 +3,19 @@ import {crearErrorDeDatosFaltantes} from '../../compartido/errors/errorDatosFalt
 
 export function crearUsuario(datos) {
     if (!datos.nombre) {
-        crearErrorDeDatosFaltantes('nombre')
+        throw crearErrorDeDatosFaltantes('nombre')
     }
 
     if (!datos.apellido) {
-        crearErrorDeDatosFaltantes('apellido')
+        throw crearErrorDeDatosFaltantes('apellido')
     }
     
     if (!datos.nombreUsuario) {
-        crearErrorDeDatosFaltantes('nombreUsuario')
+        throw crearErrorDeDatosFaltantes('nombreUsuario')
     }
     
     if (!datos.mail) {
-        crearErrorDeDatosFaltantes('mail')
+        throw crearErrorDeDatosFaltantes('mail')
     }
     const usuario = {
         id: obtenerNuevoId('usuario'),

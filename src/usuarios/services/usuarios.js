@@ -32,6 +32,6 @@ export function borrarUsuarioSegunId(id) {
 export function reemplazarUsuario(id, datosUsuario) {
     const usuario = crearUsuario(datosUsuario)
     usuario.id = id
-    dao.reemplazaUsuario(usuario)
+    dao.guardarUsuario(usuario)
 }
 

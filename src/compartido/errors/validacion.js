@@ -9,6 +9,10 @@ export function respuestaConError(error) {
             httpError.mensaje = mensajeDeErrorDeValidacion(error.campo)
             httpError.codigo = 400
             break
+        case 'NO_ENCONTRADO':
+            httpError.mensaje = error.message
+            httpError.codigo = 404
+            break
         default:
             httpError.mensaje = 'error interno'
             httpError.codigo = 500

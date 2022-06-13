@@ -32,5 +32,5 @@ export function borrarProductoSegunId(id) {
 export function reemplazarProducto(id, datosProducto) {
     const producto = crearProducto(datosProducto)
     producto.id = id
-    dao.reemplazarProducto(producto)
+    dao.guardarProducto(producto)
 }

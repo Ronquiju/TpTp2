@@ -4,20 +4,21 @@ import {crearErrorDeDatosFaltantes} from '../../compartido/errors/errorDatosFalt
 
 export function crearProducto(datosProducto) {
     if (!datosProducto.nombre) {
-        crearErrorDeDatosFaltantes('nombre')
+       throw crearErrorDeDatosFaltantes('nombre')
     }
     if (!datosProducto.precio) {
-        crearErrorDeDatosFaltantes('precio')
+       throw crearErrorDeDatosFaltantes('precio')
     }
     if (datosProducto.stock < 0) {
-        crearErrorDeDatosFaltantes('stock')
+       throw crearErrorDeDatosFaltantes('stock')
+    }
+        const producto = {
+            id: obtenerNuevoId("producto"),
+            nombre: datosProducto.nombre,
+            precio: datosProducto.precio,
+            stock: datosProducto.stock,
+        }
+        return producto 
     }
     
-    const producto = {
-        id: obtenerNuevoId('producto'),
-        nombre: datosProducto.nombre,
-        precio: datosProducto.precio,
-        stock: datosProducto.stock,
-    }
-    return producto
-}
+    

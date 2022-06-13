@@ -27,7 +27,7 @@ export function borrarVentaSegunId(id) {
 export function reemplazarVenta(id, datosVenta) {
     const venta = crearVenta(datosVenta)
     venta.id = id
-    dao.reemplazarVenta(venta)
+    dao.guardarVenta(venta)
 }
 
 

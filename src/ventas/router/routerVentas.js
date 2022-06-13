@@ -12,7 +12,8 @@ routerVentas.get('/:id', (req, res) => {
         const v = api.obtenerVentaSegunId(req.params.id)
         res.json(v)
     } catch (error) {
-        res.status(404).json({ error: error.message })
+        const { mensaje, codigo } = respuestaConError(error)
+        res.status(codigo).json({ mensaje })
     }
 })
 
