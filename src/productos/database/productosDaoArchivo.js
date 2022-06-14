@@ -8,7 +8,7 @@ export function obtenerProductos(){
     return[...productos]
 }
 
-export function guardarProducto(producto) {
+export async function guardarProducto(producto) {
     const indiceBuscado = productos.findIndex(p => p.id === producto.id)
     if (indiceBuscado === -1) {
         productos.push(producto)
@@ -17,7 +17,7 @@ export function guardarProducto(producto) {
     }
 }
 
-export function eliminarProducto(id) {
+export async function eliminarProducto(id) {
     const indiceBuscado = productos.findIndex(p => p.id === id)
     if (indiceBuscado === -1) {
         throw crearErrorRecursoNoEncontrado('producto')
@@ -25,13 +25,13 @@ export function eliminarProducto(id) {
         productos.splice(indiceBuscado, 1)
     }
 }
-export function borrarProductos() {
+export async function borrarProductos() {
     while (productos.length > 0) {
         productos.pop()
     }
 }
 
-export function recuperarProducto(id) {
+export async function recuperarProducto(id) {
     const buscado = productos.find(p => p.id === id)
     if (buscado) {
         return copiarProducto(buscado)
@@ -47,7 +47,7 @@ function copiarProducto(producto) {
 
 
 
-export function obtenerProductoSegunId(id) {
+export  async function obtenerProductoSegunId(id) {
     const productoBuscado = productos.find(p => p.id === id)
     if (productoBuscado) {
         return copiarProducto(productoBuscado)
@@ -56,7 +56,7 @@ export function obtenerProductoSegunId(id) {
     }
 }
 
-export function borrarProductoSegunId(id) {
+export async function borrarProductoSegunId(id) {
     const idProducto = productos.findIndex(p => p.id === id)
     if (idProducto === -1) {
         throw new Error('producto no encontrado')
@@ -66,7 +66,7 @@ export function borrarProductoSegunId(id) {
     }
 }
 
-export function reemplazarProducto(id, datosProducto) {
+export async function reemplazarProducto(id, datosProducto) {
     const idProducto = productos.findIndex(p => p.id === id)
     if (idProducto === -1) {
         throw new Error('productos no encontrado')
@@ -77,6 +77,6 @@ export function reemplazarProducto(id, datosProducto) {
     }
 }
 
-export function nombreEstaDisponible(nombre) {
+export async  function nombreEstaDisponible(nombre) {
     return productos.every(p => p.nombre !== nombre)
 }

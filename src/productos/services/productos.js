@@ -2,35 +2,36 @@ import { crearProducto } from '../models/producto.js'
 import dao from '../database/productosDao.js'
 import { crearErrorNombreUnico } from '../../compartido/errors/ErrorNombreUnico.js'
 
-function validarNombreUnico(nombre) {
-    if (!dao.nombreEstaDisponible(nombre)) throw crearErrorNombreUnico()
+async function validarNombreUnico(nombre) {
+    const disponible = await dao.nombreEstaDisponible(nombre)
+    if(!disponible) throw crearErrorNombreUnico
 }
 
-export function obtenerProductos() {
-    return dao.obtenerProductos()
+export async function obtenerProductos() {
+    return await dao.obtenerProductos()
 }
 
-export function agregarProducto(datosProducto) {
-    validarNombreUnico(datosProducto.nombre)
+export async function agregarProducto(datosProducto) {
+    await validarNombreUnico(datosProducto.nombre)
     const producto = crearProducto(datosProducto)
-    dao.guardarProducto(producto)
+    await dao.guardarProducto(producto)
     return producto
 }
 
-export function borrarProductos() {
-    dao.borrarProductos()
+export async function borrarProductos() {
+    await dao.borrarProductos()
 }
 
-export function obtenerProductoSegunId(id) {
-    return dao.recuperarProducto(id)
+export async function obtenerProductoSegunId(id) {
+    return await dao.recuperarProducto(id)
 }
 
-export function borrarProductoSegunId(id) {
-    dao.borrarProductoSegunId(id)
+export async function borrarProductoSegunId(id) {
+    await await dao.borrarProductoSegunId(id)
 }
 
-export function reemplazarProducto(id, datosProducto) {
+export async function reemplazarProducto(id, datosProducto) {
     const producto = crearProducto(datosProducto)
     producto.id = id
-    dao.guardarProducto(producto)
+    await dao.guardarProducto(producto)
 }

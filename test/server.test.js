@@ -91,7 +91,7 @@ describe('servidor pruebas', () => {
                 describe('si los datos son validos', () =>{
                     it('crea, guarda y devuelve un usuario', async () => {
                         
-                        const usuariosAnterior = obtenerUsuarios()
+                        const usuariosAnterior = await obtenerUsuarios()
 
                         const user = {
                             nombre:"Pablo",
@@ -107,7 +107,7 @@ describe('servidor pruebas', () => {
                         const { data: usuarioAgregado, status } = await axios.post(urlUsuarios, user)
                         assert.strictEqual(status, 201)
 
-                        const usuariosDespues = obtenerUsuarios()
+                        const usuariosDespues = await obtenerUsuarios()
 
                         const usuarioAgregadoEsperado = {...user, id: usuarioAgregado.id}
                         assert.deepStrictEqual(usuariosDespues, usuariosAnterior.concat(usuarioAgregadoEsperado))
@@ -117,7 +117,7 @@ describe('servidor pruebas', () => {
                 describe('si no carga el nombre de usuario', () => {
                     it('no agrega nada y devuelve un error', async () => {
 
-                        const usuariosAntes = obtenerUsuarios()
+                        const usuariosAntes = await obtenerUsuarios()
 
                         const user = {
                             nombre:"Pablo",
@@ -136,7 +136,7 @@ describe('servidor pruebas', () => {
                             }
                         )
 
-                        const usuariosDespues = obtenerUsuarios()
+                        const usuariosDespues = await obtenerUsuarios()
                         assert.deepStrictEqual(usuariosDespues, usuariosAntes)
 
                     })
@@ -147,7 +147,7 @@ describe('servidor pruebas', () => {
             describe('pedir usuarios por id', () => {
                 it('devuelve el usuario', async () => {
                     
-                    const usuarioAgregado = agregarUsuario(usuario2)
+                    const usuarioAgregado = await agregarUsuario(usuario2)
 
                     let usuarioObtenido
                     const{ data, status } = await axios.get(urlUsuarios + '/' + usuarioAgregado.id)
@@ -172,11 +172,11 @@ describe('servidor pruebas', () => {
 
             describe('pedir que borre un usuario por id', () => {
                 it('borre el usuario', async () =>{
-                    const usuarioAgregado = agregarUsuario(usuario1)
+                    const usuarioAgregado = await agregarUsuario(usuario1)
                     const {status} =await axios.delete(urlUsuarios + '/' + usuarioAgregado.id)
                     assert.strictEqual(status, 204)
 
-                    const usuariosDespues = obtenerUsuarios()
+                    const usuariosDespues = await obtenerUsuarios()
                     assert.ok(usuariosDespues.every(u => u.id !== usuarioAgregado.id))
                 })
             })
@@ -196,14 +196,14 @@ describe('servidor pruebas', () => {
             describe('mandarle un nuevo usuario y un id', () =>{
                 it('reemplaza el existente con el nuevo', async () =>{
                     
-                    const usuarioAgregado = agregarUsuario(usuario1)
+                    const usuarioAgregado = await agregarUsuario(usuario1)
                     const nuevoNombreUsuario = "dominguezPablo"
                     const datosAct = {...usuarioAgregado, nombreUsuario: nuevoNombreUsuario}
 
                     const  {status} = await axios.put(urlUsuarios + '/' + usuarioAgregado.id, datosAct)
                     assert.strictEqual(status,200)
 
-                    const usuarioBuscado = obtenerUsuarioSegunId(usuarioAgregado.id)
+                    const usuarioBuscado = await obtenerUsuarioSegunId(usuarioAgregado.id)
                     assert.deepStrictEqual(usuarioBuscado, datosAct)
                     
 
@@ -229,7 +229,7 @@ describe('servidor pruebas', () => {
             describe('intento agregar un producto valido', () =>{
                     it('lo crea, guarda y devuelve', async () => {
                         
-                        const productosAnteriores = obtenerProductos()
+                        const productosAnteriores = await obtenerProductos()
                         
                         const producto = {
                             nombre: "Xiaomi",
@@ -239,7 +239,7 @@ describe('servidor pruebas', () => {
                         const { data: productoAgregado, status } = await axios.post(urlProductos, producto)
                         assert.strictEqual(status, 201)
 
-                        const productosDespues = obtenerProductos()
+                        const productosDespues = await obtenerProductos()
 
                         const productoAgregadoEsperado = {...producto, id: productoAgregado.id}
                         assert.deepStrictEqual(productosDespues, productosAnteriores.concat(productoAgregadoEsperado))
@@ -251,7 +251,7 @@ describe('servidor pruebas', () => {
                 describe('si no carga el nombre del producto', () => {
                     it('no agrega nada y devuelve un error', async () => {
 
-                        const productosAnteriores = obtenerProductos()
+                        const productosAnteriores = await obtenerProductos()
                         const producto = {
                             nombre:'',
                             precio: 85000,
@@ -264,7 +264,7 @@ describe('servidor pruebas', () => {
                                 return true
                             }
                         )
-                        const productosDespues = obtenerProductos()
+                        const productosDespues =await obtenerProductos()
                         assert.deepStrictEqual(productosDespues, productosAnteriores)
 
                     })
@@ -275,7 +275,7 @@ describe('servidor pruebas', () => {
             describe('le pido productos por id', () => {
                 it('devuelve el producto', async () => {
                     
-                    const productoAgregado = agregarProducto(producto1)
+                    const productoAgregado = await agregarProducto(producto1)
                     let productoObtenido
                     const{ data, status } = await axios.get(urlProductos + '/' + productoAgregado.id)
                     assert.strictEqual(status, 200)
@@ -299,10 +299,10 @@ describe('servidor pruebas', () => {
 
             describe('le pido que borre un producto por id', () => {
                 it('borra el producto', async () =>{
-                    const productoAgregado = agregarProducto(producto1)
+                    const productoAgregado = await agregarProducto(producto1)
                     const {status} =await axios.delete(urlProductos + '/' + productoAgregado.id)
                     assert.strictEqual(status, 204)
-                    const productosDespues = obtenerProductos()
+                    const productosDespues = await obtenerProductos()
                     assert.ok(productosDespues.every(p => p.id !== productoAgregado.id))
                 })
             })
@@ -334,14 +334,14 @@ describe('servidor pruebas', () => {
             describe('le paso un producto ya existente y un  nombre  nuevo', () =>{
                 it('cambia el nombre  del producto existente por el nuevo nombre', async () =>{
                     
-                    const productoAgregado = agregarProducto(producto1)
+                    const productoAgregado = await agregarProducto(producto1)
                     const nuevoNombreProducto = "HeladeraSamsung"
                     const datosAct = {...productoAgregado, nombre: nuevoNombreProducto}
 
                     const  {status} = await axios.put(urlProductos + '/' + productoAgregado.id, datosAct)
                     assert.strictEqual(status,200)
                     
-                    const productoBuscado = obtenerProductoSegunId(productoAgregado.id)
+                    const productoBuscado = await obtenerProductoSegunId(productoAgregado.id)
                     assert.deepStrictEqual(productoBuscado, datosAct)
 
 
@@ -355,7 +355,7 @@ describe('servidor pruebas', () => {
                 describe('si los datos son validos', () =>{
                     it('crea, guarda y devuelve una venta', async () => {
 
-                        const ventasAnterior = obtenerVentas()
+                        const ventasAnterior = await obtenerVentas()
 
                         const venta = {
                             fechaCompra:"14/03/1999",
@@ -368,7 +368,7 @@ describe('servidor pruebas', () => {
                         const { data: ventaAgregada, status } = await axios.post(urlVentas, venta)
                         assert.strictEqual(status, 201)
 
-                        const ventasDespues = obtenerVentas()
+                        const ventasDespues = await obtenerVentas()
 
                         const ventaAgregadaEsperada = {...venta, id: ventaAgregada.id}
                         assert.deepStrictEqual(ventasDespues, ventasAnterior.concat(ventaAgregadaEsperada))
@@ -384,7 +384,7 @@ describe('servidor pruebas', () => {
             describe('pedir venta por id', () => {
                 it('devuelve una venta', async () => {
                     
-                    const ventaAagregar = agregarVenta(venta2)
+                    const ventaAagregar =await agregarVenta(venta2)
 
                     let ventaObtenido
                     const{ data, status } = await axios.get(urlVentas + '/' + ventaAagregar.id)
@@ -411,11 +411,11 @@ describe('servidor pruebas', () => {
             //anular/borrar una venta que exite por id
             describe('pedir que borre una venta por id', () => {
                 it('borrar venta', async () =>{
-                    const vAgrega = agregarVenta(venta1)
+                    const vAgrega = await agregarVenta(venta1)
                     const {status} =await axios.delete(urlVentas + '/' + vAgrega.id)
                     assert.strictEqual(status, 204)
 
-                    const ventaDespues = obtenerVentas()
+                    const ventaDespues =await obtenerVentas()
                     assert.ok(ventaDespues.every(u => u.id !== vAgrega.id))
                 })
             })

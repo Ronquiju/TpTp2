@@ -2,36 +2,37 @@ import { crearUsuario } from '../models/usuario.js'
 import dao from '../database/usuariosDao.js'
 import { crearErrorNombreUnico } from '../../compartido/errors/ErrorNombreUnico.js'
 
-function validarNombreUnico(nombre) {
-    if (!dao.nombreEstaDisponible(nombre)) throw crearErrorNombreUnico()
+async function validarNombreUnico(nombre) {
+    const disponible = await dao.nombreEstaDisponible(nombre)
+    if(!disponible) throw crearErrorNombreUnico
 }
 
-export function obtenerUsuarios() {
-    return dao.obtenerUsuarios()
+export async function obtenerUsuarios() {
+    return await dao.obtenerUsuarios()
 }
 
-export function agregarUsuario(datosUsuario) {
-    validarNombreUnico(datosUsuario.nombre)
+export async function agregarUsuario(datosUsuario) {
+    await validarNombreUnico(datosUsuario.nombre)
     const usuario = crearUsuario(datosUsuario)
-    dao.guardarUsuario(usuario)
+    await dao.guardarUsuario(usuario)
     return usuario
 }
 
-export function borrarUsuarios() {
-    dao.borrarUsuarios()
+export async function borrarUsuarios() {
+    await dao.borrarUsuarios()
 }
 
-export function obtenerUsuarioSegunId(id) {
-    return dao.recuperarUsuario(id)
+export async function obtenerUsuarioSegunId(id) {
+    return await dao.recuperarUsuario(id)
 }
 
-export function borrarUsuarioSegunId(id) {
-    dao.borrarUsuarioSegunId(id)
+export async function borrarUsuarioSegunId(id) {
+   await dao.borrarUsuarioSegunId(id)
 }
 
-export function reemplazarUsuario(id, datosUsuario) {
+export async function reemplazarUsuario(id, datosUsuario) {
     const usuario = crearUsuario(datosUsuario)
     usuario.id = id
-    dao.guardarUsuario(usuario)
+    await dao.guardarUsuario(usuario)
 }
 

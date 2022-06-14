@@ -4,11 +4,11 @@ import { crearErrorRecursoNoEncontrado } from '../../compartido/errors/ErrorRecu
 
 const usuarios = []
 
-export function obtenerUsuarios(){
+export async function obtenerUsuarios(){
     return[...usuarios]
 }
 
-export function guardarUsuario(usuario) {
+export async function guardarUsuario(usuario) {
     const indiceBuscado = usuarios.findIndex(u => u.id === usuario.id)
     if (indiceBuscado === -1) {
         usuarios.push(usuario)
@@ -18,7 +18,7 @@ export function guardarUsuario(usuario) {
     
 }
 
-export function elminarUsuario(id) {
+export async function elminarUsuario(id) {
     const indiceBuscado = usuarios.findIndex(u => u.id === id)
     if (indiceBuscado === -1) {
         throw crearErrorRecursoNoEncontrado('producto')
@@ -30,13 +30,13 @@ export function elminarUsuario(id) {
 
 
 
-export function borrarUsuarios() {
+export async function borrarUsuarios() {
     while (usuarios.length > 0) {
         usuarios.pop()
     }
 }
 
-export function recuperarUsuario(id) {
+export async function recuperarUsuario(id) {
      const buscado = usuarios.find(u => u.id === id)
      
     if (buscado) {
@@ -54,7 +54,7 @@ function copiarUsuario(usuario) {
 
 
 
-export function obtenerUsuarioSegunId(id) {
+export async function obtenerUsuarioSegunId(id) {
     const usuarioBuscado = usuarios.find(u => u.id === id)
     if (usuarioBuscado) {
         return copiarUsuario(usuarioBuscado)
@@ -63,7 +63,7 @@ export function obtenerUsuarioSegunId(id) {
     }
 }
 
-export function borrarUsuarioSegunId(id) {
+export async function borrarUsuarioSegunId(id) {
     const idUsuario = usuarios.findIndex(u => u.id === id)
     if (idUsuario === -1) {
         throw new Error('usuario no encontrado')
@@ -73,7 +73,7 @@ export function borrarUsuarioSegunId(id) {
     }
 }
 
-export function reemplazarUsuario(id, datosUsuario) {
+export async function reemplazarUsuario(id, datosUsuario) {
     const idUsuario = usuarios.findIndex(u => u.id === id.id)
     if (idUsuario === -1) {
         throw new Error('usuario no encontrado')

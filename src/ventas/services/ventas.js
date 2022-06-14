@@ -1,33 +1,33 @@
 import { crearVenta } from '../models/venta.js'
 import dao from '../database/ventasDao.js'
 
-export function obtenerVentas() {
-    return dao.obtenerVentas()
+export async function obtenerVentas() {
+    return await dao.obtenerVentas()
 }
 
-export function agregarVenta(datosVenta) {
+export async function agregarVenta(datosVenta) {
 
     const venta = crearVenta(datosVenta)
-    dao.guardarVenta(venta)
+    await dao.guardarVenta(venta)
     return venta
 }
 
-export function borrarVentas() {
-    dao.borrarVentas()
+export async function borrarVentas() {
+    await dao.borrarVentas()
 }
 
-export function obtenerVentaSegunId(id) {
-    return dao.recuperarVenta(id)
+export async function obtenerVentaSegunId(id) {
+    return await dao.recuperarVenta(id)
 }
 
-export function borrarVentaSegunId(id) {
-    dao.borrarVentaSegunId(id)
+export async function borrarVentaSegunId(id) {
+    await dao.borrarVentaSegunId(id)
 }
 
-export function reemplazarVenta(id, datosVenta) {
+export async function reemplazarVenta(id, datosVenta) {
     const venta = crearVenta(datosVenta)
     venta.id = id
-    dao.guardarVenta(venta)
+    await dao.guardarVenta(venta)
 }
 
 
