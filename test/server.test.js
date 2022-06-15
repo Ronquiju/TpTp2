@@ -17,40 +17,41 @@ import {
 import { obtenerProductos,
     agregarProducto,
     borrarProductos, obtenerProductoSegunId } from '../src/productos/services/productos.js'
-
+    
+   const usuario1 = {
+        nombreUsuario:"pabloDominguez",
+        apellido:"Dominguez",
+        nombre:"Pablo",
+        mail:"pablo@gmail.com",
+        fechaNacimiento:"14/03/1999",
+        domicilio:"Rivadavia21",
+        dni:"1234567"
+    }
+    
+    const usuario2 = {
+        nombre:"Juan",
+        apellido:"Dominguez",
+        nombreUsuario:"juanDominguez",
+        dni:"123456789",
+        mail:"juan@gmail.com",
+        domicilio:"Rivadavia12",
+        fechaNacimiento:"22/12/2000"
+    }
 
     const venta1 = {
         fechaCompra:"14/03/1999",
         precioTotal: 1478,
         productos:['cafetera', 'licuadora'],
-        usuario: { nombre:"Juan", domicilio:"Rivadavia12" }  
+        usuario : usuario1
     }
     const venta2 = {
         fechaCompra:"04/07/2022",
         precioTotal: 7848,
         productos:['aspiradora', 'tostadora'],
-        usuario: { nombre:"Maria", domicilio:"Alberti23"}  
+        usuario: usuario2
     }
     
-const usuario1 = {
-    nombreUsuario:"pabloDominguez",
-    apellido:"Dominguez",
-    nombre:"Pablo",
-    mail:"pablo@gmail.com",
-    fechaNacimiento:"14/03/1999",
-    domicilio:"Rivadavia21",
-    dni:"1234567"
-}
 
-const usuario2 = {
-    nombre:"Juan",
-    apellido:"Dominguez",
-    nombreUsuario:"juanDominguez",
-    dni:"123456789",
-    mail:"juan@gmail.com",
-    domicilio:"Rivadavia12",
-    fechaNacimiento:"22/12/2000"
-}
 
 const producto1 = {
     nombre: "Heladera Philco",

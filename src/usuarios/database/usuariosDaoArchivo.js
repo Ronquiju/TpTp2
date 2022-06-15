@@ -21,7 +21,7 @@ export async function guardarUsuario(usuario) {
 export async function elminarUsuario(id) {
     const indiceBuscado = usuarios.findIndex(u => u.id === id)
     if (indiceBuscado === -1) {
-        throw crearErrorRecursoNoEncontrado('producto')
+        throw crearErrorRecursoNoEncontrado('usuario')
     } else {
         usuarios.splice(indiceBuscado, 1)
     }
@@ -59,7 +59,7 @@ export async function obtenerUsuarioSegunId(id) {
     if (usuarioBuscado) {
         return copiarUsuario(usuarioBuscado)
     } else {
-        throw new Error('producto no encontrado')
+        throw new Error('usuario no encontrado')
     }
 }
 

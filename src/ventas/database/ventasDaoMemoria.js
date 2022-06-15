@@ -54,14 +54,14 @@ export function obtenerVentaSegunId(id) {
     if (ventaBuscada) {
         return copiarVenta(ventaBuscada)
     } else {
-        throw new Error('venta no encontrado')
+        throw new Error('venta no encontrada')
     }
 }
 
 export function borrarVentaSegunId(id) {
     const idVenta = ventas.findIndex(v => v.id === id)
     if (idVenta === -1) {
-        throw new Error('venta no encontrado')
+        throw new Error('venta no encontrada')
     } else {
         ventas.splice(idVenta, 1)
         
@@ -71,7 +71,7 @@ export function borrarVentaSegunId(id) {
 export function reemplazarVenta(id, datosVenta) {
     const idVenta = ventas.findIndex(v => v.id === id)
     if (idVenta === -1) {
-        throw new Error('venta no encontrado')
+        throw new Error('venta no encontrada')
     } else {
             const venta = crearVenta(datosVenta)
             venta.id = id
