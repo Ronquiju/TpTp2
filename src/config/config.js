@@ -1,1 +1,1 @@
-export const MODO_PERSISTENCIA = 'BDD'
+export const MODO_PERSISTENCIA = 'ARCHIVO'
