@@ -3,6 +3,8 @@ import  routerUsuarios  from '../usuarios/router/routerUsuarios.js'
 import  routerVentas from '../ventas/router/routerVentas.js'
 import  routerProductos  from '../productos/router/routerProductos.js'
 
+import { manejadorDeErrores } from '../compartido/errors/respuestaConError.js'
+
 
 const app = express()
 
@@ -12,6 +14,7 @@ app.use('/api/usuarios', routerUsuarios)
 app.use('/api/ventas', routerVentas)
 app.use('/api/productos', routerProductos)
 
+app.use(manejadorDeErrores)
 
 let server
 

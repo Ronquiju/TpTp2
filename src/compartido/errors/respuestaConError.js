@@ -1,21 +1,26 @@
-export function prepararRespuestaConError(error) {
-
-    const httpError = {}
+export function manejadorDeErrores(error, req, res, next) {
+    let statusCode = 500
+    let errorMessage = 'error interno'
 
     switch (error.tipo) {
         case 'FORMATO_NUMERICO_INVALIDO':
         case 'DATOS_FALTANTES':
-            httpError.mensaje = error.message
-            httpError.codigo = 400
+        case 'DATA_VALIDATION': 
+            errorMessage = error.message
+            statusCode = 400
             break
         case 'NO_ENCONTRADO':
-            httpError.mensaje = error.message
-            httpError.codigo = 404
+            errorMessage = error.message
+            statusCode = 404
             break
-        default:
-            httpError.mensaje = 'error interno'
-            httpError.codigo = 500
+        case 'NOMBRE_UNICO':
+            errorMessage = error.message
+            statusCode = 409
+            break
+        case 'ERROR_PERSISTENCIA':
+            errorMessage = error.message
+            
+            break
     }
-
-    return httpError
+    res.status(statusCode).json({ errorMessage })
 }

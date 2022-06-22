@@ -4,7 +4,7 @@ import { crearErrorRecursoNoEncontrado } from '../../compartido/errors/ErrorRecu
 
 const usuarios = []
 
-export async function obtenerUsuarios(){
+export async function recuperarUsuarios(){
     return[...usuarios]
 }
 
@@ -18,7 +18,7 @@ export async function guardarUsuario(usuario) {
     
 }
 
-export async function elminarUsuario(id) {
+export async function eliminarUsuario(id) {
     const indiceBuscado = usuarios.findIndex(u => u.id === id)
     if (indiceBuscado === -1) {
         throw crearErrorRecursoNoEncontrado('usuario')
@@ -27,10 +27,7 @@ export async function elminarUsuario(id) {
     }
 }
 
-
-
-
-export async function borrarUsuarios() {
+export async function eliminarUsuarios() {
     while (usuarios.length > 0) {
         usuarios.pop()
     }
@@ -85,5 +82,5 @@ export async function reemplazarUsuario(id, datosUsuario) {
 }
 
 export function nombreEstaDisponible(nombre) {
-    return usuarios.every(u => u.nombre !== nombre)
+    return usuarios.every(u => u.nombreUsuario !== nombre)
 }

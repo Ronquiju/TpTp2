@@ -8,7 +8,7 @@ async function validarNombreUnico(nombre) {
 }
 
 export async function obtenerProductos() {
-    return await dao.obtenerProductos()
+    return await dao.recuperarProductos()
 }
 
 export async function agregarProducto(datosProducto) {
@@ -19,7 +19,7 @@ export async function agregarProducto(datosProducto) {
 }
 
 export async function borrarProductos() {
-    await dao.borrarProductos()
+    await dao.eliminarProductos()
 }
 
 export async function obtenerProductoSegunId(id) {
@@ -27,7 +27,7 @@ export async function obtenerProductoSegunId(id) {
 }
 
 export async function borrarProductoSegunId(id) {
-    await await dao.borrarProductoSegunId(id)
+    await await dao.eliminarProducto(id)
 }
 
 export async function reemplazarProducto(id, datosProducto) {

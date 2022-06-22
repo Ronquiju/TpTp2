@@ -37,29 +37,25 @@ import { obtenerProductos,
         domicilio:"Rivadavia12",
         fechaNacimiento:"22/12/2000"
     }
+    const producto1 = {
+        nombre: "Placa Video rtx 3060",
+        precio: "125000",
+        stock: "25"
+    }
 
     const venta1 = {
         fechaCompra:"14/03/1999",
         precioTotal: 1478,
-        productos:['cafetera', 'licuadora'],
+        productos:producto1,
         usuario : usuario1
     }
     const venta2 = {
         fechaCompra:"04/07/2022",
         precioTotal: 7848,
-        productos:['aspiradora', 'tostadora'],
+        productos:producto1,
         usuario: usuario2
     }
     
-
-
-const producto1 = {
-    nombre: "Heladera Philco",
-    precio: "125000",
-    stock: "25"
-}
-
-
 
 describe('servidor pruebas', () => {
     let urlUsuarios
@@ -75,15 +71,15 @@ describe('servidor pruebas', () => {
     after(async () => {
         await desconectar()
     })
-    beforeEach(() => {
-        borrarUsuarios()
-        borrarProductos()
-        borrarVentas()
+    beforeEach(async () => {
+        await borrarUsuarios()
+        await borrarProductos()
+        await borrarVentas()
     })
-    afterEach(() => {
-        borrarUsuarios()
-        borrarProductos()
-        borrarVentas()
+    afterEach(async() => {
+        await borrarUsuarios()
+        await borrarProductos()
+        await borrarVentas()
     })
 
     describe('servidor escuchando', () => {
@@ -233,7 +229,7 @@ describe('servidor pruebas', () => {
                         const productosAnteriores = await obtenerProductos()
                         
                         const producto = {
-                            nombre: "Xiaomi",
+                            nombre: "Xiaomi redmi note 3",
                             precio: "85000",
                             stock: "25"
                         }
@@ -336,7 +332,7 @@ describe('servidor pruebas', () => {
                 it('cambia el nombre  del producto existente por el nuevo nombre', async () =>{
                     
                     const productoAgregado = await agregarProducto(producto1)
-                    const nuevoNombreProducto = "HeladeraSamsung"
+                    const nuevoNombreProducto = "Iphone 13"
                     const datosAct = {...productoAgregado, nombre: nuevoNombreProducto}
 
                     const  {status} = await axios.put(urlProductos + '/' + productoAgregado.id, datosAct)
@@ -418,9 +414,11 @@ describe('servidor pruebas', () => {
 
                     const ventaDespues =await obtenerVentas()
                     assert.ok(ventaDespues.every(u => u.id !== vAgrega.id))
+                    
                 })
             })
             //anular/borrar una venta que no existe
+            //me tira error en dao bdd porque el status code de error en persitencia es de 500 y yo neceisto un 404
             describe('pedir que borre una venta que no exista', () =>{
                 it('no encuentra la venta', async () => {
                     await assert.rejects(

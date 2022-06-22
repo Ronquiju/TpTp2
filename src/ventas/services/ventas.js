@@ -2,7 +2,7 @@ import { crearVenta } from '../models/venta.js'
 import dao from '../database/ventasDao.js'
 
 export async function obtenerVentas() {
-    return await dao.obtenerVentas()
+    return await dao.recuperarVentas()
 }
 
 export async function agregarVenta(datosVenta) {
@@ -13,7 +13,7 @@ export async function agregarVenta(datosVenta) {
 }
 
 export async function borrarVentas() {
-    await dao.borrarVentas()
+    await dao.eliminarVentas()
 }
 
 export async function obtenerVentaSegunId(id) {
@@ -21,13 +21,14 @@ export async function obtenerVentaSegunId(id) {
 }
 
 export async function borrarVentaSegunId(id) {
-    await dao.borrarVentaSegunId(id)
+    await dao.eliminarVenta(id)
 }
 
 export async function reemplazarVenta(id, datosVenta) {
     const venta = crearVenta(datosVenta)
     venta.id = id
     await dao.guardarVenta(venta)
+    return venta
 }
 
 

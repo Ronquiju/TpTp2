@@ -8,7 +8,7 @@ async function validarNombreUnico(nombre) {
 }
 
 export async function obtenerUsuarios() {
-    return await dao.obtenerUsuarios()
+    return await dao.recuperarUsuarios()
 }
 
 export async function agregarUsuario(datosUsuario) {
@@ -19,7 +19,7 @@ export async function agregarUsuario(datosUsuario) {
 }
 
 export async function borrarUsuarios() {
-    await dao.borrarUsuarios()
+    await dao.eliminarUsuarios()
 }
 
 export async function obtenerUsuarioSegunId(id) {
@@ -27,7 +27,7 @@ export async function obtenerUsuarioSegunId(id) {
 }
 
 export async function borrarUsuarioSegunId(id) {
-   await dao.borrarUsuarioSegunId(id)
+   await dao.eliminarUsuario(id)
 }
 
 export async function reemplazarUsuario(id, datosUsuario) {

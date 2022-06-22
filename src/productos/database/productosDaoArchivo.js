@@ -4,7 +4,7 @@ import { crearErrorRecursoNoEncontrado } from '../../compartido/errors/ErrorRecu
 
 const productos = []
 
-export function obtenerProductos(){
+export function recuperarProductos(){
     return[...productos]
 }
 
@@ -25,7 +25,7 @@ export async function eliminarProducto(id) {
         productos.splice(indiceBuscado, 1)
     }
 }
-export async function borrarProductos() {
+export async function eliminarProductos() {
     while (productos.length > 0) {
         productos.pop()
     }
