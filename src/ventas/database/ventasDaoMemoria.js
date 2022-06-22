@@ -4,7 +4,11 @@ import { crearErrorRecursoNoEncontrado } from '../../compartido/errors/ErrorRecu
 
 const ventas = []
 
-export function guardarVenta(venta) {
+export async function recuperarVentas(){
+    return[...ventas]
+}
+
+export async function guardarVenta(venta) {
     const indiceBuscado = ventas.findIndex(v => v.id === venta.id)
     if (indiceBuscado === -1) {
         ventas.push(venta)
@@ -12,26 +16,13 @@ export function guardarVenta(venta) {
         ventas[indiceBuscado] = venta
     }
 }
-
-export function eliminarVenta(id) {
-    const indiceBuscado = ventas.findIndex(v => v.id === id)
-    if (indiceBuscado === -1) {
-        throw crearErrorRecursoNoEncontrado('venta')
-    } else {
-        ventas.splice(indiceBuscado, 1)
-    }
-}
-
-
-
-
-export function borrarVentas() {
+export async function eliminarVentas() {
     while (ventas.length > 0) {
         ventas.pop()
     }
 }
 
-export function recuperarVenta(id) {
+export async function recuperarVenta(id) {
     const buscada = ventas.find(v => v.id === id)
     if (buscada) {
         return copiarVenta(buscada)
@@ -45,11 +36,7 @@ function copiarVenta(venta) {
     
 }
 
-export function obtenerVentas(){
-    return[...ventas]
-}
-
-export function obtenerVentaSegunId(id) {
+export async function obtenerVentaSegunId(id) {
     const ventaBuscada = ventas.find(v => v.id === id)
     if (ventaBuscada) {
         return copiarVenta(ventaBuscada)
@@ -58,13 +45,12 @@ export function obtenerVentaSegunId(id) {
     }
 }
 
-export function borrarVentaSegunId(id) {
+export async function eliminarVenta(id) {
     const idVenta = ventas.findIndex(v => v.id === id)
     if (idVenta === -1) {
-        throw new Error('venta no encontrada')
+        throw crearErrorRecursoNoEncontrado('venta')
     } else {
-        ventas.splice(idVenta, 1)
-        
+        ventas.splice(idVenta, 1)   
     }
 }
 
