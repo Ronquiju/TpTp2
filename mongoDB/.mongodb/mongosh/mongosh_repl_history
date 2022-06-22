@@ -1,0 +1,9 @@
+db.usuarios.find()
+db.usuarios.insertOne({nombre: "jose"})
+db.usuarios.find()
+db.usuarios.insertOne({nombre: "jose"} db.usuarios.insertOne({nombre: "jose"}
+db.usuarios.insertOne()
+use tp
+db.personas.intertOne()
+show dbs
+use tp
